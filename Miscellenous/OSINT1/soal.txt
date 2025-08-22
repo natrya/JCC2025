@@ -1,0 +1,3 @@
+Cari latitude,longitude (koordinat GPS) dari hotel tersebut. 4 digit desimal dan tanpa spasi.
+
+format JCC25{lat,long}

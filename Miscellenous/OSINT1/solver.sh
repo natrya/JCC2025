@@ -1,1 +1,1 @@
-echo "JCC25{sheraton}"
+echo "JCC25{-7.2624,112.7380}"
