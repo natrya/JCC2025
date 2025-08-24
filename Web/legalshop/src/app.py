@@ -195,7 +195,7 @@ def order_confirmation(id):
     order = SnackOrder.query.filter_by(id=id, user_id=session['user_id']).first_or_404()
 
     if any(item.product.name == 'Elite Hacker Snack' for item in order.items):
-        return render_template('order_confirmation.html', order=order, flag=os.environ.get('FLAG', 'itdays25{lmao_flag}'))
+        return render_template('order_confirmation.html', order=order, flag=os.environ.get('FLAG', 'JCC25{lmao_flag}'))
 
     return render_template('order_confirmation.html', order=order)
 

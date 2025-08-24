@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Vegan Shop{% endblock %}
+
+{% block content %}
+<section class="search-results-header" aria-labelledby="search-results-title">
+    <div class="section-header">
+        <h1 id="search-results-title">Search Results</h1>
+        <p>Find your favorite fresh vegetables</p>
+    </div>
+</section>
+
+<section class="search-results-content">
+    <div class="result-info" role="region" aria-live="polite">
+        <h3>{{ result_message|safe }}</h3>
+        <div class="result-actions">
+            <a href="{{ url_for('home') }}" class="btn btn-secondary" aria-label="Return to home page">
+                <span class="btn-icon">←</span>
+                Back to Home
+            </a>
+            <a href="#search" class="btn btn-outline" aria-label="Search again">
+                <span class="btn-icon">🔍</span>
+                New Search
+            </a>
+        </div>
+    </div>
+
+    {% if found_vegetables %}
+    <div class="search-results-grid" aria-label="Search results">
+        <div class="results-header">
+            <p>Found {{ found_vegetables|length }} vegetable{{ 's' if found_vegetables|length != 1 else '' }}</p>
+        </div>
+
+        <div class="vegetables-grid" role="grid">
+            {% for key, veggie in found_vegetables.items() %}
+            <article class="veggie-card" role="gridcell">
+                <div class="veggie-image" aria-hidden="true">{{ key[:2].upper() }}</div>
+                <h3>{{ veggie.name }}</h3>
+                <p class="veggie-description">{{ veggie.description }}</p>
+                <div class="veggie-meta">
+                    <div class="price">Rp {{ "{:,}".format(veggie.price) }} / kg</div>
+                    <div class="stock">Stock: {{ veggie.stock }} kg</div>
+                </div>
+                <a href="{{ url_for('add_to_cart', veggie_key=key) }}" class="btn btn-primary" aria-label="Add {{ veggie.name }} to cart">
+                    Add to Cart
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

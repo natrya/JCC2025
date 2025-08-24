@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Vegan Shop{% endblock %}
+
+{% block content %}
+<section class="admin-header" aria-labelledby="admin-title">
+    <div class="section-header">
+        <h1 id="admin-title">Admin Panel</h1>
+        <p>System administration and monitoring dashboard</p>
+    </div>
+</section>
+
+<section class="admin-content">
+    <div class="admin-alert">
+        <div class="alert alert-warning" role="alert">
+            <strong>Access Restricted</strong>
+            <p>This page is for administrators only. Please log in to access administrative functions.</p>
+        </div>
+    </div>
+
+    <div class="admin-info" role="region" aria-labelledby="system-info">
+        <h3 id="system-info">System Information</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Server Status</span>
+                <span class="info-value status-online">Online</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Total Vegetables</span>
+                <span class="info-value">{{ vegetables|length }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Database</span>
+                <span class="info-value">SQLite (sayuran.db)</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Version</span>
+                <span class="info-value">1.0.0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-actions" role="toolbar" aria-label="Administrative actions">
+        <button class="btn btn-primary" disabled aria-label="View system reports (disabled)">
+            <span class="btn-icon">📊</span>
+            View Reports
+        </button>
+        <button class="btn btn-secondary" disabled aria-label="System settings (disabled)">
+            <span class="btn-icon">⚙️</span>
+            Settings
+        </button>
+        <button class="btn btn-danger" disabled aria-label="Logout (disabled)">
+            <span class="btn-icon">🔒</span>
+            Logout
+        </button>
+    </div>
+
+    <div class="admin-note" role="complementary">
+        <p><em>Hint: There might be another way to access system information... 🤔</em></p>
+    </div>
+</section>
+{% endblock %}

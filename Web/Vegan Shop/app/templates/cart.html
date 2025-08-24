@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart - Vegan Shop{% endblock %}
+
+{% block content %}
+<section class="cart-header" aria-labelledby="cart-title">
+    <div class="section-header">
+        <h1 id="cart-title">Shopping Cart</h1>
+        <p>Review your selected items and proceed to checkout</p>
+    </div>
+</section>
+
+{% if cart %}
+    <div class="cart-items" role="table" aria-label="Shopping cart items">
+        <div class="cart-header-row" role="row">
+            <span class="item-name-header">Item</span>
+            <span class="item-price-header">Price</span>
+        </div>
+        {% for item in cart %}
+        <div class="cart-item" role="row">
+            <div class="item-info" role="cell">
+                <h4>{{ item.name }}</h4>
+                <p class="item-quantity">Quantity: 1 kg</p>
+            </div>
+            <div class="item-price" role="cell">
+                Rp {{ "{:,}".format(item.price) }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cart-summary">
+        <div class="cart-total">
+            <div class="total-row">
+                <span class="total-label">Subtotal:</span>
+                <span class="total-amount">Rp {{ "{:,}".format(total) }}</span>
+            </div>
+            <div class="total-row">
+                <span class="total-label">Delivery:</span>
+                <span class="total-amount">Free</span>
+            </div>
+            <div class="total-row total-final">
+                <span class="total-label">Total:</span>
+                <span class="total-amount">Rp {{ "{:,}".format(total) }}</span>
+            </div>
+        </div>
+
+        <div class="cart-actions">
+            <a href="{{ url_for('home') }}" class="btn btn-secondary">Continue Shopping</a>
+            <a href="{{ url_for('clear_cart') }}" class="btn btn-outline">Clear Cart</a>
+            <button class="btn btn-primary btn-large">Proceed to Checkout</button>
+        </div>
+    </div>
+{% else %}
+    <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p>Add some fresh vegetables to get started with your order.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary btn-large">Start Shopping</a>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Akses Ditolak - Pasar Sayur Segar{% endblock %}
+
+{% block content %}
+<div class="blocked-message">
+    <h1>❌ Pencarian Ditolak</h1>
+    <div class="alert alert-danger">
+        <p>Kata kunci "<strong>{{ query }}</strong>" mengandung karakter yang tidak diizinkan!</p>
+        <p>Silakan gunakan kata kunci yang lebih sederhana.</p>
+    </div>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">← Kembali ke Beranda</a>
+</div>
+{% endblock %}

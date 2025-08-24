@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vegan Shop - Fresh Organic Produce{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="{{ url_for('home') }}" class="logo" aria-label="Vegan Shop - Home">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">Vegan Shop</span>
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" aria-label="Home">Beranda</a>
+                <a href="{{ url_for('view_cart') }}" aria-label="Shopping cart with {{ cart|length }} items">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-count">({{ cart|length }})</span>
+                </a>
+                <a href="{{ url_for('admin') }}" aria-label="Admin panel">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Vegan Shop</h3>
+                    <p>Fresh organic produce from farm to table</p>
+                </div>
+                <div class="footer-info">
+                    <p>&copy; 2025 Vegan Shop. All rights reserved.</p>
+                    <p>Delivering fresh, organic vegetables to your doorstep</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

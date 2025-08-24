@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Fresh Organic Vegetables - Vegan Shop{% endblock %}
+
+{% block content %}
+<section class="hero" role="banner">
+    <div class="hero-content">
+        <h1>Fresh Organic Vegetables</h1>
+        <p>Delivering farm-fresh produce directly to your table</p>
+        <div class="hero-actions">
+            <a href="#products" class="btn btn-primary btn-large">Shop Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="search-section" aria-labelledby="search-heading">
+    <div class="search-content">
+        <h2 id="search-heading">Find Your Favorite Vegetables</h2>
+        <p>Search our selection of fresh, organic produce</p>
+        <form action="{{ url_for('search') }}" method="POST" class="search-form" role="search">
+            <input type="text" name="query" placeholder="Search vegetables: tomato, carrot, spinach..." class="search-input" required aria-label="Search vegetables">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div class="alert alert-info" role="note">
+            <strong>Pro tip:</strong> Use our search to find specific vegetables in our inventory
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="products" aria-labelledby="products-heading">
+    <div class="section-header">
+        <h2 id="products-heading">Available Vegetables</h2>
+        <p>Fresh organic produce, sourced directly from local farms</p>
+    </div>
+
+    <div class="vegetables-grid" role="grid">
+        {% for key, veggie in vegetables.items() %}
+        <article class="veggie-card" role="gridcell">
+            <div class="veggie-image" aria-hidden="true">{{ key[:2].upper() }}</div>
+            <h3>{{ veggie.name }}</h3>
+            <p class="veggie-description">{{ veggie.description }}</p>
+            <div class="veggie-meta">
+                <div class="price">Rp {{ "{:,}".format(veggie.price) }} / kg</div>
+                <div class="stock">Stock: {{ veggie.stock }} kg</div>
+            </div>
+            <a href="{{ url_for('add_to_cart', veggie_key=key) }}" class="btn btn-primary" aria-label="Add {{ veggie.name }} to cart">Add to Cart</a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="cart-cta" aria-labelledby="cart-heading">
+    <div class="text-center">
+        <h3 id="cart-heading">Ready to checkout?</h3>
+        <p>Review your selections and complete your order</p>
+        <a href="{{ url_for('view_cart') }}" class="btn btn-secondary btn-large" aria-label="View shopping cart with {{ cart|length }} items">
+            View Cart ({{ cart|length }} items)
+        </a>
+    </div>
+</section>
+{% endblock %}
