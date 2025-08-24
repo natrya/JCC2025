@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin: 2rem auto;">
+    <div style="background: #0f0f1e; padding: 3rem; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h1 style="color: #ff2da0; margin-bottom: 1rem;">{{ product.name }}</h1>
+        <p style="color: #a259ff; font-size: 1.2rem; font-style: italic; margin-bottom: 2rem;">{{ product.tagline }}</p>
+        
+        <div style="margin: 2rem 0; padding: 2rem; background: #1a1a2e; border-radius: 10px;">
+            <p style="margin-bottom: 1rem;">{{ product.description }}</p>
+            <h3 style="color: #00e0ff; margin: 1.5rem 0 0.5rem;">🧪 Ingredients:</h3>
+            <p style="font-family: monospace; color: #888;">{{ product.ingredients }}</p>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+            <p style="font-size: 2rem; color: #00e0ff; font-weight: bold;">${{ "%.2f"|format(product.price) }}</p>
+            
+            <form method="POST" action="/cart/add" style="margin: 0; padding: 0; background: none; box-shadow: none;">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <input type="number" name="quantity" value="1" min="1" max="99" style="width: 80px; margin: 0;">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </div>
+            </form>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; color: #666;">
+            <a href="/products" style="color: #00e0ff;">← Back to all products</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmed - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px; margin: 2rem auto; text-align: center;">
+    <div style="background: #0f0f1e; padding: 3rem; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h1 style="color: #00e0ff; margin-bottom: 1rem;">✅ Mission Accomplished!</h1>
+        
+        <div style="margin: 2rem 0;">
+            <p style="font-size: 8rem; margin: 0;">🍪🕵️</p>
+            <p style="color: #a259ff; font-size: 1.2rem; margin-top: 1rem;">
+                Your snacks are en route via secure tunnel (wink).
+            </p>
+        </div>
+        
+        <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+            <h2 style="color: #ff2da0; margin-bottom: 1rem;">Order #{{ order.id }}</h2>
+            <p style="color: #888;">Timestamp: {{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            
+            <div style="margin: 2rem 0; text-align: left;">
+                {% for item in order.items %}
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                    <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                    <span style="color: #00e0ff;">${{ "%.2f"|format(item.product.price * item.quantity) }}</span>
+                </div>
+                {% endfor %}
+                <div style="border-top: 1px solid #333; margin-top: 1rem; padding-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>Total:</strong>
+                        <strong style="color: #00e0ff;">${{ "%.2f"|format(order.total) }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if flag %}
+        <div style="background: #2d1b3d; padding: 2rem; border-radius: 10px; margin: 2rem 0; border: 2px solid #ff2da0;">
+            <h3 style="color: #00e0ff; margin-bottom: 1rem;">🎯 Special Delivery!</h3>
+            <div style="background: #0f0f1e; padding: 1rem; border-radius: 5px; font-family: monospace;">
+                <p style="color: #00ff00; font-size: 1.1rem; margin: 0; word-break: break-all;">{{ flag }}</p>
+            </div>
+            <p style="color: #a259ff; font-size: 0.9rem; margin-top: 1rem;">
+                🚩 Mission Intel Acquired
+            </p>
+        </div>
+        {% endif %}
+        
+        <p style="color: #666; margin: 2rem 0;">
+            📧 A covert confirmation has been sent to your secure inbox
+        </p>
+        
+        <a href="/products" class="btn">Continue Shopping</a>
+    </div>
+</div>
+{% endblock %}

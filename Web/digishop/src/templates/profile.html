@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="text-center mb-8">
+        <h2 class="text-4xl font-bold mb-2 text-gray-900">Profile</h2>
+        <p class="text-gray text-sm">Manage your account</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-900">Current Profile</h3>
+            <div class="card p-4 rounded">
+                {% if user.profile_picture %}
+                    {% if user.profile_type and user.profile_type.startswith('image/') %}
+                        <div class="text-center mb-4">
+                            <img src="{{ url_for('static', filename=user['profile_picture']) }}"
+                                 class="w-32 h-32 rounded-full border-4 border-blue-500 mx-auto object-cover"
+                                 alt="Profile Picture">
+                        </div>
+                        <div class="text-xs text-gray mb-2">
+                            <p>Image loaded successfully</p>
+                            <p>Type: {{ user.profile_type }}</p>
+                        </div>
+                    {% else %}
+                        <div class="bg-red-50 border border-red-200 text-red-700 p-4 mb-4 rounded">
+                            <span class="font-medium">Error:</span> File type not renderable
+                        </div>
+                        <div class="card p-3 rounded">
+                            <div class="text-gray-700 text-sm mb-2 font-medium">Server Response:</div>
+                            <pre class="text-gray-600 text-xs overflow-x-auto bg-gray-50 p-2 rounded">{{ error_preview }}</pre>
+                        </div>
+                        <div class="text-xs text-red-600 mt-2">
+                            <p>Status: Render failure</p>
+                            <p>Type: {{ user.profile_type or 'Unknown' }}</p>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center py-8">
+                        <div class="text-6xl mb-4">👤</div>
+                        <p class="text-gray-900 mb-2">No profile content</p>
+                        <p class="text-gray text-sm">Database field empty</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-900">Upload Image</h3>
+
+            <form method="post" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 text-sm mb-2 font-medium">Image URL:</label>
+                    <input type="text" name="photo_url" placeholder="Paste image URL here..."
+                           required class="input-normal p-3 w-full focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <button type="submit" class="btn-blue p-3 w-full font-medium">
+                    Upload Image
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-8 pt-4 border-t border-gray-200">
+        <div class="text-xs text-gray">
+            <p>Account: {{ user['username'] }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

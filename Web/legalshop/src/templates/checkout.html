@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px; margin: 2rem auto;">
+    <h1 style="text-align: center; color: #00e0ff; margin-bottom: 2rem;">🔐 Secure Checkout</h1>
+    
+    <div style="background: #0f0f1e; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border: 2px solid #00e0ff;">
+        <div style="text-align: center;">
+            <h2 style="color: #00e0ff; margin-bottom: 0.5rem;">💰 Account Balance</h2>
+            <p style="font-size: 2rem; color: #00e0ff; font-weight: bold; margin: 0;">${{ "%.2f"|format(user_balance) }}</p>
+        </div>
+    </div>
+    
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+        <div style="padding: 0.5rem 1rem; background: #00e0ff; color: #000; border-radius: 20px;">Plan the Heist</div>
+        <div style="padding: 0.5rem 1rem; background: #333; color: #888; border-radius: 20px;">→</div>
+        <div style="padding: 0.5rem 1rem; background: #333; color: #888; border-radius: 20px;">Make the Drop</div>
+    </div>
+    
+    <form method="POST" action="/checkout">
+        <div style="background: #0f0f1e; padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+            <h2 style="color: #ff2da0; margin-bottom: 1.5rem;">📍 Delivery Coordinates</h2>
+            <input type="text" placeholder="Full Name" required>
+            <input type="text" placeholder="Secret Drop Location (Address)" required>
+            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="ZIP Code" required>
+        </div>
+        
+        <div style="background: #0f0f1e; padding: 2rem; border-radius: 10px;">
+            <h2 style="color: #ff2da0; margin-bottom: 1.5rem;">💳 Payment Intel</h2>
+            <input type="text" placeholder="Card Number" pattern="[0-9]{16}" required>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <input type="text" placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}" required>
+                <input type="text" placeholder="CVV" pattern="[0-9]{3}" required>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%; margin-top: 2rem;">Complete Order</button>
+        
+        <p style="text-align: center; margin-top: 1rem; color: #666;">
+            🔒 Your payment is encrypted with quantum entanglement
+        </p>
+    </form>
+</div>
+{% endblock %}

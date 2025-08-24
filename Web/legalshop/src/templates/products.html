@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Products - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center; margin: 2rem 0; color: #00e0ff;">🛒 The Full Arsenal</h1>
+    <p style="text-align: center; color: #a259ff; margin-bottom: 3rem;">Authorized snacks only—scan your cravings.</p>
+    
+    <div class="product-grid">
+        {% for product in products %}
+        <a href="/products/{{ product.id }}" class="product-card">
+            <h3>{{ product.name }}</h3>
+            <p class="tagline">{{ product.tagline }}</p>
+            <p style="color: #888; margin: 1rem 0;">{{ product.description }}</p>
+            <p class="price">${{ "%.2f"|format(product.price) }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

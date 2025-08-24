@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Cart - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin: 2rem auto;">
+    <h1 style="text-align: center; color: #00e0ff; margin-bottom: 2rem;">🛒 Your Loot</h1>
+    
+    {% if cart_items %}
+        <div style="background: #0f0f1e; padding: 2rem; border-radius: 10px;">
+            {% for item in cart_items %}
+            <div style="padding: 1.5rem 0; border-bottom: 1px solid #333;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="color: #ff2da0;">{{ item.product.name }}</h3>
+                        <p style="color: #888; margin: 0.5rem 0;">{{ item.product.tagline }}</p>
+                        <p style="color: #666;">Quantity: {{ item.quantity }}</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="color: #00e0ff; font-size: 1.2rem;">${{ "%.2f"|format(item.subtotal) }}</p>
+                        <p style="color: #666; font-size: 0.9rem;">${{ "%.2f"|format(item.product.price) }} each</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #00e0ff;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="color: #00e0ff;">Total:</h2>
+                    <p style="font-size: 2rem; color: #00e0ff; font-weight: bold;">${{ "%.2f"|format(total) }}</p>
+                </div>
+                {% if session.user_id %}
+                <div style="margin-top: 1rem; padding: 1rem; background: #1a1a2e; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #888;">Your Balance:</span>
+                        <span style="color: #00e0ff; font-weight: bold;">${{ "%.2f"|format(user_balance) }}</span>
+                    </div>
+                    {% if user_balance < total %}
+                    <p style="color: #ff4444; margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+                        ⚠️ Insufficient balance! You need ${{ "%.2f"|format(total - user_balance) }} more.
+                    </p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                {% if session.user_id %}
+                    {% if user_balance >= total %}
+                        <a href="/checkout" class="btn">Proceed to Checkout</a>
+                    {% else %}
+                        <button class="btn" disabled style="opacity: 0.5; cursor: not-allowed;">Insufficient Balance</button>
+                        <p style="color: #888; margin-top: 1rem; font-size: 0.9rem;">You need more funds to complete this order</p>
+                    {% endif %}
+                {% else %}
+                    <a href="/login" class="btn">Login to Checkout</a>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 4rem;">
+            <p style="font-size: 1.5rem; color: #888; margin-bottom: 2rem;">Your cart is empty. Time to fill it with delicious wrongdoing!</p>
+            <a href="/products" class="btn">Browse Products</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

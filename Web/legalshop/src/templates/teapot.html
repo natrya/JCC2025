@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}418 - I'm a Teapot - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center; padding: 4rem 0;">
+    <h1 style="font-size: 6rem; color: #00e0ff; margin-bottom: 1rem;">418</h1>
+    <h2 style="color: #ff2da0; margin-bottom: 2rem;">☕ I'm a Teapot</h2>
+    
+    <div style="margin: 3rem 0;">
+        <p style="font-size: 8rem;">🫖🍪</p>
+    </div>
+    
+    <p style="font-size: 1.2rem; color: #a259ff; margin-bottom: 2rem;">
+        This server is a teapot, not a coffee machine!
+    </p>
+    
+    <p style="color: #888; margin-bottom: 3rem;">
+        But don't worry, our teapot comes with complementary snacks.
+    </p>
+    
+    <div style="background: #0f0f1e; padding: 2rem; border-radius: 10px; max-width: 500px; margin: 0 auto 3rem;">
+        <h3 style="color: #00e0ff; margin-bottom: 1rem;">🎉 Secret Stash Unlocked!</h3>
+        <p style="color: #a259ff;">You found the forbidden teapot! Here's a special code:</p>
+        <p style="font-size: 2rem; color: #ff2da0; font-family: monospace; margin: 1rem 0;">TEAPOT418</p>
+        <p style="color: #666;">Use it for 4.18% off your next order!</p>
+    </div>
+    
+    <a href="/products" class="btn">Browse Snacks</a>
+</div>
+{% endblock %}

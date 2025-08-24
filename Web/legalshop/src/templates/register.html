@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Register - LegalSnacks{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="/register">
+        <h2>🔐 Join the Underground</h2>
+        <input type="text" name="username" placeholder="Choose your alias" required>
+        <input type="password" name="password" placeholder="Secret passphrase" required>
+        <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+        <p style="text-align: center; margin-top: 1rem;">
+            Already a member? <a href="/login" style="color: #00e0ff;">Sign in</a>
+        </p>
+    </form>
+</div>
+{% endblock %}

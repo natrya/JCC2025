@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>🕵️ Welcome to LegalSnacks</h1>
+        <p>"Taste so sneaky, you'll want to inspect element."</p>
+        <a href="/products" class="btn">Start Snacking</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2 style="text-align: center; margin: 3rem 0; color: #00e0ff;">Featured Products</h2>
+    <div class="product-grid">
+        {% for product in featured_products %}
+        <a href="/products/{{ product.id }}" class="product-card">
+            <h3>{{ product.name }}</h3>
+            <p class="tagline">{{ product.tagline }}</p>
+            <p class="price">${{ "%.2f"|format(product.price) }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div style="text-align: center; padding: 3rem 0;">
+    <div class="container" style="background: #0f0f1e; padding: 2rem; border-radius: 10px; border: 1px solid #333;">
+        <h3 style="color: #ff2da0; margin-bottom: 1rem;">🍕 Random Snack Fact</h3>
+        <p id="snack-fact" style="color: #a259ff;">Loading delicious trivia...</p>
+    </div>
+</div>
+
+<script>
+    const snackFacts = [
+        "Did you know pizza was delivered to space in 2001?",
+        "The world's largest cookie weighed over 40,000 pounds!",
+        "Potato chips were invented by accident in 1853.",
+        "M&Ms were created for soldiers during WWII.",
+        "The most expensive pizza in the world costs $12,000.",
+        "Popcorn is over 5,000 years old!",
+        "Cotton candy was invented by a dentist.",
+        "The first chocolate chip cookie was made in 1938."
+    ];
+    
+    document.getElementById('snack-fact').textContent = snackFacts[Math.floor(Math.random() * snackFacts.length)];
+</script>
+{% endblock %}

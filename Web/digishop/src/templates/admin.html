@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="text-center mb-8">
+        <h2 class="text-4xl font-bold mb-2 text-gray-900">Admin Panel</h2>
+        <p class="text-gray text-sm">Manage the catalog</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-900">Add Item</h3>
+            <form method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 text-sm mb-2 font-medium">Name:</label>
+                    <input type="text" name="name" placeholder="Enter name" required
+                           class="input-normal p-3 w-full focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-sm mb-2 font-medium">Description:</label>
+                    <textarea name="description" placeholder="Enter description..." required
+                              rows="4" class="input-normal p-3 w-full focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                </div>
+
+                <button type="submit" name="add" class="btn-blue p-3 w-full font-medium">
+                    Add Item
+                </button>
+            </form>
+        </div>
+
+        <div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-900">Manage Items</h3>
+            <div class="text-xs text-gray mb-4">
+                <p class="mb-1">Admin access</p>
+                <p class="mb-1">Full permissions</p>
+                <p>Database: Asteroids</p>
+            </div>
+
+            {% if asteroids %}
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    <div class="text-gray-900 text-sm mb-2 font-medium">Total items: {{ asteroids|length }}</div>
+                    {% for asteroid in asteroids %}
+                        <div class="card p-3 rounded">
+                            <div class="flex justify-between items-center">
+                                <div class="flex-1">
+                                    <div class="text-gray-900 font-bold">{{ asteroid['name'] }}</div>
+                                </div>
+                                <form method="POST" class="ml-3">
+                                    <input type="hidden" name="asteroid_id" value="{{ asteroid['id'] }}">
+                                    <button type="submit" name="delete"
+                                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                                            onclick="return confirm('Delete this item?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center py-8">
+                    <div class="text-4xl mb-2">📊</div>
+                    <p class="text-gray-900">No items found</p>
+                    <p class="text-gray text-sm">Collection is empty</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-8 pt-4 border-t border-gray-200">
+        <div class="text-xs text-gray">
+            <p class="mb-1">Admin session active</p>
+            <p>Management tools ready</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

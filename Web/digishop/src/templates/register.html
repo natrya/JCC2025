@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-2 text-gray-900">Register</h2>
+        <p class="text-gray text-sm">Create your account</p>
+    </div>
+
+    {% if error %}
+        <div class="bg-red-50 border border-red-200 text-red-700 p-4 mb-6 rounded">
+            <span class="font-medium">Error:</span> {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST" class="space-y-4">
+        <div>
+            <label class="block text-gray-700 text-sm mb-2 font-medium">Username:</label>
+            <input type="text" name="username" placeholder="Choose username" required
+                   class="input-normal p-3 w-full focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label class="block text-gray-700 text-sm mb-2 font-medium">Password:</label>
+            <input type="password" name="password" placeholder="Choose password" required
+                   class="input-normal p-3 w-full focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <button type="submit" class="btn-blue p-3 w-full font-medium">
+            Register
+        </button>
+    </form>
+
+    <div class="mt-8 text-center">
+        <p class="text-gray text-sm mb-4">Already have an account?</p>
+        <a href="{{ url_for('home') }}" class="btn-gray inline-block px-6 py-2 font-medium">
+            Login
+        </a>
+    </div>
+</div>
+{% endblock %}

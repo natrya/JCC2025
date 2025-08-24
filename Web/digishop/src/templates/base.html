@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        .bg-main {
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+        .nav-bg {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .text-blue {
+            color: #3b82f6;
+        }
+        .input-normal {
+            background: white;
+            border: 1px solid #d1d5db;
+            color: #1e293b;
+            border-radius: 6px;
+        }
+        .input-normal:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .btn-blue {
+            background: #3b82f6;
+            color: white;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .btn-blue:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+        }
+        .btn-gray {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .btn-gray:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        .text-gray {
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-main">
+    <nav class="nav-bg px-4 py-4">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-lg font-semibold text-blue">Digital Hub</span>
+            </div>
+            <div class="flex items-center gap-4 text-sm">
+                {% if session['username'] %}
+                    <a href="{{ url_for('catalog') }}" class="text-gray-600 hover:text-gray-900 transition-colors">Browse</a>
+                    {% if session['role'] == 'admin' %}
+                        <a href="{{ url_for('admin') }}" class="text-gray-600 hover:text-gray-900 transition-colors">Admin</a>
+                    {% else %}
+                        <a href="{{ url_for('profile') }}" class="text-gray-600 hover:text-gray-900 transition-colors">Profile</a>
+                    {% endif %}
+                    <span class="text-blue font-medium">{{ session['username'] }}</span>
+                    <a href="{{ url_for('logout') }}" class="text-gray-600 hover:text-red-600 transition-colors">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('home') }}" class="text-gray-600 hover:text-gray-900 transition-colors">Login</a>
+                    <a href="{{ url_for('register') }}" class="text-gray-600 hover:text-gray-900 transition-colors">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <div class="card rounded-lg p-6">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <footer class="mt-12 text-center text-gray text-sm max-w-4xl mx-auto px-4">
+        <div class="card rounded p-4">
+            <span>Digital Hub | {{ session['username'] if session['username'] else 'Guest' }}</span>
+        </div>
+    </footer>
+
+
+</body>
+</html>
