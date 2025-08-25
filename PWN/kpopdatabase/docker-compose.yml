@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  kpop:
+    build: .
+    container_name: kpop-db-pwn
+    ports:
+      - "9001:5000"
+    restart: unless-stopped

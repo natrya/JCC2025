@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\title{CIPH7 v1: An Invertible Byte-Wise Cipher Pipeline}
+\author{Challenge Spec}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Overview}
+We define an 8-step, fully invertible transformation over byte strings. Let a plaintext be a byte vector \(m = (m_0,\dots,m_{n-1})\) with each \(m_i \in \mathbb{Z}_{256} = \{0,\dots,255\}\). The cipher is keyed by a 32-bit seed \(s \in \{0,\dots,2^{32}-1\}\). All arithmetic is performed in the ring \(\mathbb{Z}_{256}\) unless otherwise stated.
+
+The ciphertext is distributed as a single ASCII line
+\[
+\texttt{CIPH7:1:SEED=}0x\text{XXXXXXXX}\texttt{:LEN=}n'\texttt{:DATA=}\operatorname{b64}(c)
+\]
+where \(c\) is the final byte string after Step 7, and \(\operatorname{b64}\) denotes standard Base64 encoding.
+
+\section*{PRNG}
+We use the 32-bit xorshift PRNG initialized with seed \(s\):
+\begin{align*}
+X &\leftarrow s \\
+X &\leftarrow X \oplus (X \ll 13) \\
+X &\leftarrow X \oplus (X \gg 17) \\
+X &\leftarrow X \oplus (X \ll 5)
+\end{align*}
+The state \(X\) evolves per call; output bytes are \(X \bmod 256\). For unbiased indices in Fisher--Yates we use rejection sampling over 32-bit outputs.
+
+\section*{Checksum Prefix}
+Compute two checksums over the plaintext \(m\):
+\[
+ c_0 = \sum_{i=0}^{n-1} m_i \pmod{256}, \qquad c_1 = \sum_{i=0}^{n-1} i\,m_i \pmod{256}.
+\]
+Form the working vector by prefixing them: \(w^{(0)} = (c_0, c_1, m_0,\dots,m_{n-1})\).
+
+\section*{Step 1: Affine Byte Map}
+Let
+\[
+ a = 1 + 2\big((s \bmod 127) + 1\big) \bmod 254, \qquad b_0 = \big\lfloor s/2^8 \big\rfloor \bmod 256.
+\]
+Note that \(a\) is odd, hence invertible modulo \(2^8\). For each position \(i\) apply
+\[
+ w^{(1)}_i = a\,w^{(0)}_i + b_0 + i \pmod{256}.
+\]
+
+\section*{Step 2: Global Permutation}
+Generate a permutation \(\pi\) of \(\{0,\dots,|w^{(1)}|-1\}\) using Fisher--Yates where the indices are driven by the PRNG. Apply it as
+\[
+ w^{(2)}_i = w^{(1)}_{\pi(i)}.
+\]
+\(\pi\) is bijective; its inverse \(\pi^{-1}\) is used during decryption.
+
+\section*{Step 3: Nonlinear S-box}
+Derive constants
+\[
+ r_1 = \big\lfloor s/2^{24} \big\rfloor \bmod 256, \qquad r_2 = 1 + \big( \big\lfloor s/2^{16} \big\rfloor \bmod 8 \big).
+\]
+Define the S-box as XOR followed by 8-bit rotation:
+\[
+ S(x) = \operatorname{ROTL}_8\big(x \oplus r_1,\ r_2\big).
+\]
+Apply component-wise: \(w^{(3)}_i = S(w^{(2)}_i)\).
+
+\section*{Step 4: Keystream XOR}
+Generate a keystream \(k_i\) from successive PRNG bytes and apply
+\[
+ w^{(4)}_i = w^{(3)}_i \oplus k_i.
+\]
+
+\section*{Step 5: Running Sum with IV}
+Let the IV be \(\text{iv} = (s \oplus \text{0xA5A5A5A5}) \bmod 256\). Define
+\[
+ w^{(5)}_0 = w^{(4)}_0 + \text{iv} \pmod{256}, \qquad w^{(5)}_i = w^{(4)}_i + w^{(5)}_{i-1} \pmod{256}\ \ (i\ge 1).
+\]
+
+\section*{Step 6: Chunk Reversal}
+Let \(L = 3 + (s \bmod 5)\). Partition \(w^{(5)}\) into consecutive chunks of length \(L\) (the last chunk may be shorter) and reverse the order of elements within each chunk to obtain \(w^{(6)}\).
+
+\section*{Step 7: Output}
+Let \(c = w^{(6)}\). Armor using Base64 and attach the header with version, seed, and length.
+
+\section*{Decryption}
+All steps are invertible; apply in reverse order:
+\begin{enumerate}
+  \item Undo chunk reversal with the same \(L\).
+  \item Undo running sum: \(x_0 = w^{(5)}_0 - \text{iv}\), \(x_i = w^{(5)}_i - w^{(5)}_{i-1}\) for \(i\ge 1\).
+  \item XOR the same keystream.
+  \item Apply inverse S-box: \(S^{-1}(y) = \operatorname{ROTR}_8(y, r_2) \oplus r_1\).
+  \item Apply \(\pi^{-1}\).
+  \item Apply inverse affine map. Let \(a^{-1} \equiv a^{-1} \pmod{256}\). For each index \(i\):
+  \[
+   w^{(0)}_i = a^{-1}\big(w^{(1)}_i - b_0 - i\big) \pmod{256}.
+  \]
+  \item Remove the two-byte prefix and verify \(c_0, c_1\) against the recovered message.
+\end{enumerate}
+
+\section*{Notes}
+\begin{itemize}
+  \item The affine multiplier \(a\) is guaranteed odd, hence invertible in \(\mathbb{Z}_{256}\).
+  \item Fisher--Yates with rejection-sampled indices yields a uniform permutation conditional on the PRNG outputs.
+  \item All state used during encryption (seed, length) is disclosed in the header, so the construction is a puzzle rather than a secure cryptosystem.
+\end{itemize}
+
+\end{document}

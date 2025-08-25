@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  weebs-pwn:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "31337:31337"
+    restart: unless-stopped

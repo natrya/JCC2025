@@ -1,0 +1,164 @@
+:root {
+  --bg: #0b1220;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #e6ecff;
+  --muted: #94a3b8;
+  --accent: #8b5cf6;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 80% -20%, #1e293b 0%, rgba(30, 41, 59, 0) 60%),
+              radial-gradient(1000px 600px at 0% 0%, #0ea5e9 0%, rgba(14, 165, 233, 0) 60%),
+              linear-gradient(180deg, #0b1220 0%, #0a0f1a 100%);
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 960px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hgroup h1 {
+  font-size: 28px;
+  margin: 0 0 4px 0;
+}
+
+.hgroup p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.badge {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6);
+  color: #0b1220;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 140px;
+  resize: vertical;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  padding: 14px;
+  border-radius: 10px;
+  outline: none;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+button.primary {
+  background: linear-gradient(135deg, #22d3ee, #a78bfa);
+  color: #0b1220;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--card-border);
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+}
+
+.indicator { width: 12px; height: 12px; border-radius: 999px; }
+
+.pass { background: linear-gradient(135deg, #34d399, #10b981); }
+.fail { background: linear-gradient(135deg, #f87171, #ef4444); }
+
+.hint { color: var(--muted); font-size: 12px; }
+
+.footer {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
