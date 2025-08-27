@@ -1,0 +1,4 @@
+FORMAT=V1
+SEED=284026
+ALGO=subst+spiral+perm
+DATA=a4c1ca9d76b04ebeb7120b632a70856e
