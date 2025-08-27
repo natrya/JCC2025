@@ -1,0 +1,1 @@
+strings chall | grep -A 4 'JCC25' | tr -d '\n'
