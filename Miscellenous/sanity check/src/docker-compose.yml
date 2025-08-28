@@ -1,0 +1,8 @@
+services:
+  lool-netcat:
+    build: .
+    ports:
+      - "5437:1234"
+    restart: unless-stopped
+    privileged: true
+    container_name: lool-netcat
