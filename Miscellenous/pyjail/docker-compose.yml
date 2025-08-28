@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  pyjail:
+    build:
+      context: ./src
+      dockerfile: ./Dockerfile
+    container_name: pyjail
+    ports:
+      - "4013:4013"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+

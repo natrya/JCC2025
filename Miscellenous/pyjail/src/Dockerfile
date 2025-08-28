@@ -9,4 +9,4 @@ RUN apt-get update && \
 COPY chall.py .
 COPY flag.txt .
 
-CMD socat TCP-LISTEN:8080,fork,reuseaddr EXEC:"python3 chall.py",stderr
+CMD socat TCP-LISTEN:4013,fork,reuseaddr EXEC:"python3 chall.py",stderr
