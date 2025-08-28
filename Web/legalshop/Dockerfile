@@ -8,12 +8,12 @@ RUN pip install --upgrade pip && \
 
 COPY src/ .
 
-EXPOSE 5000
+EXPOSE 4004
 
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 ENV FLASK_RUN_HOST=0.0.0.0 
-ENV FLASK_RUN_PORT=5000
+ENV FLASK_RUN_PORT=4004
 ENV PYTHONUNBUFFERED=1
 
 CMD ["python", "app.py"]

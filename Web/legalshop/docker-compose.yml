@@ -3,6 +3,6 @@ services:
     build:
       context: .
     ports:
-      - "5000:5000"
+      - "4004:4004"
     environment:
       - FLAG=JCC25{21d0de263340212445da6c141d50c14f}

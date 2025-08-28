@@ -4,7 +4,7 @@ services:
   pasar-sayur-segar:
     build: .
     ports:
-      - "1338:1338"
+      - "4001:4001"
     environment:
       - FLASK_ENV=production
     restart: unless-stopped
