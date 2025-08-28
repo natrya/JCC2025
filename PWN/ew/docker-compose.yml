@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  ew:
+    build:
+      context: ./src
+      dockerfile: ./Dockerfile
+    container_name: ew
+    ports:
+      - "4009:4009"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
