@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt-get update && \
+    apt-get install -y build-essential && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       gcc make socat ca-certificates && \
     rm -rf /var/lib/apt/lists/*
@@ -20,7 +21,7 @@ COPY src/flag.txt /srv/flag.txt
 RUN useradd -m ctf && chown root:ctf /srv/flag.txt && chmod 440 /srv/flag.txt
 USER ctf
 
-EXPOSE 5000
+EXPOSE 4010
 
 # Run via socat as a net service
-CMD ["socat", "-dd", "TCP-LISTEN:5000,reuseaddr,fork", "EXEC:/srv/kpop,stderr,pty,rawer,echo=0"]
+CMD ["socat", "-dd", "TCP-LISTEN:4010,reuseaddr,fork", "EXEC:/srv/kpop,stderr,pty,rawer,echo=0"]

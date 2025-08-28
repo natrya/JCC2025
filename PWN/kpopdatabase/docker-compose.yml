@@ -4,5 +4,5 @@ services:
     build: .
     container_name: kpop-db-pwn
     ports:
-      - "9001:5000"
+      - "4010:4010"
     restart: unless-stopped
