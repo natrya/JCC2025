@@ -13,6 +13,6 @@ RUN chmod 644 /flag.txt
 
 USER ctfuser
 
-EXPOSE 1338
+EXPOSE 4001
 
 CMD ["python", "app.py"]
