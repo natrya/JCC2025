@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  aaaaaa:
+    build:
+      context: ./src
+      dockerfile: ./Dockerfile
+    container_name: aaaaaa
+    ports:
+      - "4007:4007"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
