@@ -9,7 +9,6 @@ RUN useradd -m -u 1000 -s /bin/bash ctf
 WORKDIR /home/ctf
 
 COPY chall /home/ctf/
-COPY chall.c /home/ctf/
 COPY flag.txt /home/ctf/
 
 RUN chown -R root:root /home/ctf && \
