@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  jccmart:
+    build:
+      context: ./src
+      dockerfile: ./Dockerfile
+    container_name: jccmart
+    ports:
+      - "4008:4008"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
