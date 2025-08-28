@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  digishop:
+    build: .
+    container_name: digishop
+    ports:
+      - "4002:4002"
+    restart: unless-stopped
+
