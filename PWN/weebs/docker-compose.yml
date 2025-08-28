@@ -1,9 +1,16 @@
-version: '3.8'
+version: "3.8"
+
 services:
-  weebs-pwn:
+  weebs:
     build:
-      context: .
-      dockerfile: docker/Dockerfile
+      context: ./src
+      dockerfile: ./Dockerfile
+    container_name: weebs
     ports:
-      - "31337:31337"
+      - "4012:4012"
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
