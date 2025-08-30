@@ -20,7 +20,7 @@ def seed():
         db.commit()
 
         # Admin with flag as raw password
-        flag = "JCC2025{graphQL_iNj3c7i0n_&_ID0R_fun}"
+        flag = "JCC25{graphQL_iNj3c7i0n_&_ID0R_fun}"
         admin = User(username="admin", password=flag, role="admin")
         db.add(admin)
         db.commit()
