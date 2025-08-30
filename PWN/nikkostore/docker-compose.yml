@@ -5,6 +5,6 @@ services:
     image: nikkostore:latest
     container_name: nikkostore
     ports:
-      - "5000:5000"
+      - "4011:4011"
     restart: unless-stopped
 

@@ -8,5 +8,6 @@ export default defineConfig({
   build: {
     sourcemap: false,
     target: 'es2019',
+    // minify so small and obfuscate
   },
 });

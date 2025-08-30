@@ -2,7 +2,7 @@ image:
 	docker build -t weebs .
 
 chall:
-	gcc -O2 -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wall -Wextra -fno-PIE -no-pie -o chal chal.c -Wl,-z,relro -Wl,-z,now -ldl 
+	gcc -O0 -fno-stack-protector -U_FORTIFY_SOURCE -Wall -Wextra -fPIE -pie -o chal chal.c -ldl 
 
 deploy:
 	docker run -d -p 127.0.0.1:4012:4012 -it weebs

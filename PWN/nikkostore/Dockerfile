@@ -16,8 +16,8 @@ COPY flag.txt /app/flag.txt
 
 RUN gcc -O2 -no-pie -fno-stack-protector -o /app/store /app/src/store.c
 
-EXPOSE 5000
+EXPOSE 4011
 
-CMD ["/bin/sh", "-c", "socat TCP-LISTEN:5000,reuseaddr,fork EXEC:/app/store,stderr"]
+CMD ["/bin/sh", "-c", "socat TCP-LISTEN:4011,reuseaddr,fork EXEC:/app/store,stderr"]
 
 
