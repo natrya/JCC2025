@@ -5,9 +5,18 @@
 #define FLAGSIZE_MAX 64
 
 void win(){
-  /*
-    you win function, no need to worry about the code
-  */
+  char flag[FLAGSIZE_MAX];
+  FILE *fd;
+
+  fd = fopen("flag.txt", "r");
+  if (fd == NULL){
+    printf("%s%s", 
+          "gagal buka flag.txt, bikin file flag.txt dulu ya!\n",
+          "kalau ini kejadian di server remote hubungi panitia\n");
+    exit(1);
+  }
+  fgets(flag, 64, fd);
+  printf(flag);
 }
 
 void setup(){
@@ -60,14 +69,14 @@ int main(){
           break;
         case 1000:
           if(moneyyyy <= 999999999){
-            puts("mau flag? harus kaya dlu broh\n");
+            puts("minimal kaya dulu le\n");
           } else{
             win();
             exit(1);
           }
           break;
         default:
-          puts("klo milih yang benar rek\n");
+          puts("yg bener aja wok\n");
       }
   
       c = 0;
