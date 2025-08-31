@@ -5,6 +5,7 @@ import random
 import re
 from pathlib import Path
 
+# https://nikko.id/read.php?id=so-random
 
 NUM_PROBLEMS_DEFAULT = 10
 SEED_DIGITS = 6
@@ -15,17 +16,11 @@ def read_md5_from_flag(flag_path: Path) -> str:
     text = flag_path.read_text(encoding="utf-8").strip().lower()
     if re.fullmatch(r"[0-9a-f]{32}", text):
         return text
-    # Fallback so the generator remains runnable before user fills real md5
-    sample = hashlib.md5(b"SAMPLE_FLAG").hexdigest()
-    print(
-        f"[warn] flag.txt does not contain a valid 32-char md5 hex. "
-        f"Using sample md5 {sample} for generation. Replace flag.txt and re-run."
-    )
+    sample = hashlib.md5(b"NIKKO_ENGGALIANO_PRATAMA").hexdigest()
     return sample
 
 
 def derive_seed_from_md5(flag_md5: str) -> str:
-    # Deterministic seed derived from md5 content
     numeric_seed = int(flag_md5, 16) % 1_000_000
     return f"{numeric_seed:06d}"
 
@@ -88,23 +83,16 @@ def generate_single(flag_md5: str, out_file: Path) -> None:
     out_file.parent.mkdir(parents=True, exist_ok=True)
     seed_str = derive_seed_from_md5(flag_md5)
     seed_numeric = int(seed_str)
-
-    # Stage 1: hex substitution
     sub, _inv = build_hex_substitution(seed_numeric)
     stage1 = apply_substitution(flag_md5, sub)
-
-    # Stage 2: 4x8 spiral traversal permutation
     spiral_perm = spiral_order(4, 8)
     stage2 = apply_permutation(stage1, spiral_perm)
-
-    # Stage 3: seeded global permutation
     perm3 = build_permutation(seed_numeric ^ 0xA5A5A5, HASH_LENGTH)
     final_cipher = apply_permutation(stage2, perm3)
 
     content = (
-        "FORMAT=V1\n"
+        "FORMAT=NIKKO\n"
         f"SEED={seed_str}\n"
-        "ALGO=subst+spiral+perm\n"
         f"DATA={final_cipher}\n"
     )
     out_file.write_text(content, encoding="utf-8")

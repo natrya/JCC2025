@@ -16,13 +16,13 @@ graphql_app = GraphQLRouter(
     context_getter=get_context,
 )
 
-app = FastAPI(title="Grapter CTF GraphQL API")
+app = FastAPI(title="Nikko Enggaliano")
 
 app.include_router(graphql_app, prefix="/graphql")
 
 
 @app.get("/")
 def root():
-    return {"message": "Grapter CTF GraphQL running. Visit /graphql"}
+    return {"message": "Nikko Enggaliano API, Please visit /graphql for having fun"}
 
 
