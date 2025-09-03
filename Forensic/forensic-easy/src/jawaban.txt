@@ -1,0 +1,35 @@
+Level Easy - Operation Black USB: The Lab Mystery
+by Mark Rizal Thalib 
+Storyline
+Di suatu pagi, guru menemukan sebuah USB misterius tergeletak di lab komputer sekolah. Guru meminta kalian, tim "Cyber Ops SMK", untuk menyelidiki isi USB ini.
+Tugas kalian adalah mengungkap petunjuk tersembunyi dan mencari tahu siapa pemilik sebenarnya dari USB tersebut.
+1.	File Metadata
+ -	Ternyata ada file jadwal_kelas.docx di dalam USB.
+ -	🕵️ Misi: Cari tahu siapa pembuat (author / creator) file tersebut.
+ -	hint : untuk melihat metadata, dapat menggunakan exiftool
+ -	JCC25{R3dPanda}
+
+2.	Deleted File
+ -	Ada file yang sempat dihapus di Recycle Bin USB.
+ -	🕵️ Misi: Pulihkan file tersebut dan cari tahu isi dari filenya.
+ -	hint : akses ke artefak Recycle Bin
+ -	JCC25{C00l_Y0u_F1nD_M3}
+
+3.	Hidden Note
+ -	Salah satu gambar menyimpan pesan rahasia di metadata.
+ -	🕵️ Misi: Bongkar metadata gambar dan temukan isi pesan rahasianya.
+ -	hint : untuk melihat metadata, dapat menggunakan exiftool
+ -	JCC25{Hi,R3dPanda was here...}
+
+4.	Suspicious Shortcut
+ -	Ada shortcut game.lnk yang terlihat mencurigakan.
+ -	🕵️ Misi: Cari tahu alamat url yang dijalankan oleh shortcut itu.
+ -	hint : untuk melihat metadata, dapat menggunakan exiftool
+ -	JCC25{http://wear-voters-genuine-pure.trycloudflare.com}
+
+5.	Clue in USBSTOR
+ -	Dari artefak Registry SYSTEM, terlihat USB ini pernah dicolok ke komputer lab.
+ -	🕵️ Misi: Temukan Serial Number dari USB tersebut.
+ -	hint : Gunakan Registry Explorer untuk menelusuri key terkait USB pada Registry SYSTEM 
+ -	JCC25{1234567890ABCDEF}
+

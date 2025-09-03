@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  detektifconanjunior:
+    build: .
+    container_name: DetektifConanJunior
+    ports:
+      - "4017:4017"
+    restart: always
+
