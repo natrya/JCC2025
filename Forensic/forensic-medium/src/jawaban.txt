@@ -1,0 +1,34 @@
+Level Medium - Operation Secret: The Mysterious Email
+by Mark Rizal Thalib 
+Storyline
+Pagi ini, seorang siswa melaporkan adanya email mencurigakan yang masuk ke inboxnya. Email tersebut membawa sebuah lampiran berbahaya yang ternyata memicu serangkaian aktivitas aneh di komputernya. Guru meminta kalian, tim "Cyber Ops SMK" untuk menyelidiki kasus ini.
+Tugas kalian adalah menemukan jejak digital dari serangan ini dan mengungkap siapa dalang di baliknya.
+1.	Lampiran Berbahaya
+ -	File jadwal_kelas.docx ditemukan di email.
+ -	🕵️ Misi: Temukan hash MD5 dari file tersebut.
+ -	hint: Gunakan tool hashing sederhana dari powershell
+ -	JCC25{A0A41C4FEA0D9EDA3D7B4C7807AE202A}
+
+2.	Shortcut Palsu
+ -	Terdapat file jadwal.lnk yang mencurigakan.
+ -	🕵️ Misi: Bongkar shortcut ini dan temukan URL berbahaya di dalamnya.
+ -	hint: Decode Base64 dari PowerShell command
+ -	JCC25{http://voters-wear-genuine-pure.trycloudflare.com}
+
+3.	Jejak Browser
+ -	Siswa ternyata diarahkan ke sebuah website mencurigakan.
+ -	🕵️ Misi: Cari tahu domain apa yang dikunjungi
+ -	hint: Cari domain yang tidak wajar, terlihat seperti “C2 server”.
+ -	JCC25{http://control-r3dpanda.net/}
+
+4.	Login Misterius
+ -	Event log menunjukkan ada login aneh ke komputer.
+ -	🕵️ Misi: Siapa username yang dipakai penyerang untuk login? dan berapa IP Address yang digunakan?
+ -	hint: Cari di Security Event Log, Event ID 4624.
+ -	JCC25{student01:192.168.146.137}
+
+5.	File Rahasia Terkunci
+ -	Sebuah file nilai_siswa.zip ditemukan dalam keadaan terkunci.
+ -	🕵️ Misi: Buka dan temukan isi pesan rahasia di dalam file exfil.txt.
+ -	hint: Password ZIP bisa dicari dari metadata Comment.
+ -	JCC25{DATA_EXFIL_SUCCESS}

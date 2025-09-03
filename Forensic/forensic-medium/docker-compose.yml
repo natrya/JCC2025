@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  detektifconanremaja:
+    build: .
+    container_name: DetektifConanRemaja
+    ports:
+      - "4018:4018"
+    restart: always
+
