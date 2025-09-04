@@ -1,0 +1,8 @@
+services:
+  sanity-check:
+    build: ./src
+    ports:
+      - "4014:4014"
+    restart: unless-stopped
+    privileged: true
+    container_name: sanity-check
