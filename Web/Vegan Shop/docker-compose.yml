@@ -9,3 +9,9 @@ services:
       - FLASK_ENV=production
     restart: unless-stopped
     container_name: pasar-sayur-challenge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4001/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

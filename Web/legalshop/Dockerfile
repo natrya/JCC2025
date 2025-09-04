@@ -2,6 +2,11 @@ FROM python:3.12.2-slim
 
 WORKDIR /app
 
+# Install curl (and clean up cache to keep image small)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY src/requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt

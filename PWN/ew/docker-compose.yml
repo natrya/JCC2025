@@ -13,4 +13,9 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
-
+    healthcheck:
+      test: ["CMD", "bash", "-c", "</dev/tcp/localhost/4009"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

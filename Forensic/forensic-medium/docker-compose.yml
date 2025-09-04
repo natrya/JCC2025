@@ -7,4 +7,9 @@ services:
     ports:
       - "4018:4018"
     restart: always
-
+    healthcheck:
+      test: ["CMD", "bash", "-c", "</dev/tcp/localhost/4018"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

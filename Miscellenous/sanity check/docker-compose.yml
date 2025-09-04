@@ -6,3 +6,9 @@ services:
     restart: unless-stopped
     privileged: true
     container_name: sanity-check
+    healthcheck:
+      test: ["CMD", "bash", "-c", "</dev/tcp/localhost/4014"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
