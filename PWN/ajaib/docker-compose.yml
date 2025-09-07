@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ajaib:
+    build: .
+    container_name: ajaib
+    command: >
+      bash -c "echo 0 > /proc/sys/kernel/randomize_va_space || true;
+               while true; do
+                 socat TCP-LISTEN:4005,reuseaddr,fork EXEC:/opt/challs/bin/ret2libc;
+               done"
+    ports:
+      - "4005:4005"
+    privileged: true
+    volumes:
+      - /proc:/proc:rw   # required to disable ASLR inside container
+

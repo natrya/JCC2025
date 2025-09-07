@@ -1,0 +1,19 @@
+CTF PWN x64
+
+1) sesuatu (Port 4006)
+Di sebuah ruangan remang dengan suara kipas komputer yang berputar, seorang pemuda sedang menatap layar hitam terminal. Sebuah program kecil baru saja ia tulis—sederhana, hanya beberapa baris kode. Namun, di balik kesederhanaan itu, tersimpan sebuah pintu rahasia.
+Program itu tidak menanyakan nama, tidak meminta kata sandi. Ia hanya menunggu dan berkata lewat layar:
+"Kirimkan sesuatu kepadaku."
+Sang pemuda tersenyum tipis. Ia tahu, program itu tidak pandai menolak. Apa pun yang dikirimkan ke dalamnya akan ditelan mentah-mentah. Program hanya punya ruang sempit, sekotak kecil berisi 256 karakter, namun ia tidak pernah peduli jika ada yang memaksanya dengan isi yang lebih berbahaya.
+Ketika kotak itu terisi, program tidak sekadar menyimpannya. Ia langsung mencoba menjalankan isi kotak itu, seakan-akan semua yang masuk adalah perintah sah. Tanpa ragu, tanpa saringan, tanpa penghalang.
+Di situlah letak rahasianya: siapa pun yang cerdik bisa menyusupkan perintah sendiri, dan program akan menuruti tanpa banyak tanya.
+Selesai sudah tugas program itu. Ia menutup dirinya dengan tenang, seolah tak pernah menyimpan rahasia. Namun, bagi yang tahu cara berbicara dengannya, program kecil itu bisa berubah menjadi kunci untuk membuka sesuatu yang jauh lebih besar.
+Hint: Tuliskan mantra dalam bahasa mesin yang bisa langsung dieksekusi.
+Flag: JCC25{stack_shellcode_success}
+
+2) ret2win (Port 4015)
+Cerita: Ada sebuah program sederhana yang seolah-olah biasa saja. Tapi kabarnya, ada tombol ajaib yang bisa ditekan untuk membuka kotak harta karun — kamu hanya perlu tahu cara menekannya.
+Hint: Kotak harta karun sudah punya tombol khusus di dalam program. Kamu hanya perlu menemukan cara untuk menekannya secara paksa.
+Flag: JCC25{ret2win_magic_button}
+
+

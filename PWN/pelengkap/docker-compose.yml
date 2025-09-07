@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  sesuatu:
+    build: .
+    container_name: sesuatu
+    volumes:
+      - ./src/flags/ret2shellcode/flag.txt:/home/ctfuser/flag.txt:ro
+    command: socat TCP-LISTEN:4006,reuseaddr,fork EXEC:/opt/challs/bin/sesuatu
+    ports:
+      - "4006:4006"
+
+  hore:
+    build: .
+    container_name: hore
+    volumes:
+      - ./src/flags/ret2win/flag.txt:/opt/challs/bin/flag_ret2win.txt:ro
+    command: socat TCP-LISTEN:4015,reuseaddr,fork EXEC:/opt/challs/bin/hore
+    ports:
+      - "4015:4015"
+
+
