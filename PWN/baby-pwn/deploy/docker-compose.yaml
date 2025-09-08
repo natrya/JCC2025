@@ -1,0 +1,15 @@
+version: '3'
+services:
+  just_jump:
+    image: just_jump
+    build: .
+    restart: always
+    environment:
+      - TERM=xterm
+    ports:
+      - "25280:25280"
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 8192
+      cpu: 20  # Limit CPU time similar to rlimit_cpu in xinetd

@@ -1,0 +1,14 @@
+service just_jump
+{
+    disable = no
+    socket_type = stream
+    protocol = tcp
+    wait = no
+    user = brandy
+    type = UNLISTED
+    port = 25280
+    bind = 0.0.0.0
+    server = /home/brandy/run
+    per_source = 10
+    rlimit_cpu = 20
+}
