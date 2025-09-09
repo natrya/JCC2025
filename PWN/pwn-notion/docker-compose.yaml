@@ -2,7 +2,7 @@ version: '3'
 services:
   baycysec-notion:
     image: baycysec-notion
-    build: .
+    build: deploy/
     restart: always
     environment:
       - TERM=xterm
