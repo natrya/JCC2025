@@ -6,7 +6,7 @@ service rizal_heist
     wait = no
     user = brandy
     type = UNLISTED
-    port = 25281
+    port = 4019
     bind = 0.0.0.0
     server = /home/brandy/run
     per_source = 10

@@ -6,7 +6,7 @@ service just_jump
     wait = no
     user = brandy
     type = UNLISTED
-    port = 25280
+    port = 4016
     bind = 0.0.0.0
     server = /home/brandy/run
     per_source = 10

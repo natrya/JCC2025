@@ -1,0 +1,15 @@
+version: '3'
+services:
+  rizal_heist:
+    image: rizal_heist
+    build: deploy/
+    restart: always
+    environment:
+      - TERM=xterm
+    ports:
+      - "4019:4019"
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 8192
+      cpu: 20  # Limit CPU time similar to rlimit_cpu in xinetd

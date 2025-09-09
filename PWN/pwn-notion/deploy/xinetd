@@ -6,7 +6,7 @@ service baycysec-notion
     wait = no
     user = brandy
     type = UNLISTED
-    port = 25282
+    port = 4020
     bind = 0.0.0.0
     server = /home/brandy/run
     per_source = 10

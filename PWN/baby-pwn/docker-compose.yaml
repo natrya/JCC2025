@@ -2,12 +2,12 @@ version: '3'
 services:
   just_jump:
     image: just_jump
-    build: .
+    build: deploy/
     restart: always
     environment:
       - TERM=xterm
     ports:
-      - "25280:25280"
+      - "4016:4016"
     ulimits:
       nofile:
         soft: 4096
