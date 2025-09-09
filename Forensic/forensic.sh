@@ -9,7 +9,7 @@ if [[ -z "$ACTION" ]]; then
 fi
 
 # List of projects you want to manage
-PROJECTS=("forensic-easy" "forensic-medium")
+PROJECTS=("forensic-easy" "forensic-medium" "forensic-hard")
 
 for proj in "${PROJECTS[@]}"; do
   if [[ -d "$proj" ]]; then

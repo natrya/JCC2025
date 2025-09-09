@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  gurudetektifconan:
+    build: .
+    container_name: GuruDetektifConan
+    ports:
+      - "4020:4020"
+    restart: always
+    healthcheck:
+      test: ["CMD", "bash", "-c", "</dev/tcp/localhost/4020"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

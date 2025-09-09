@@ -1,0 +1,35 @@
+Level Hard - Operation Silent Root: Infiltration of the Lab Server
+Storyline
+Sekolahmu mendapat laporan aneh, ada seseorang yang berhasil menyusup ke server Linux sekolah. Katanya, penyusup itu pintar menyembunyikan jejak, bahkan sampai nyimpen data rahasia ke dalam gambar!
+Kamu sekarang jadi bagian dari Tim "Cyber Ops SMK". Tugasmu adalah mencari tahu bagaimana penyusup masuk, apa yang dia lakukan, dan kemana data sekolah itu dikirim."
+1.	Unauthorized Access
+o	Server log mencatat banyak login gagal sebelum akhirnya ada yang berhasil.
+o	🕵️ Misi: Siapa nama user yang berhasil dibobol oleh attacker?
+
+2.	Privilege Escalation
+o	Attacker berhasil menaikkan hak akses menjadi root.
+o	🕵️ Misi: Dengan cara apa attacker mendapatkan akses root?
+
+3.	Persistence Service
+o	Attacker membuat service palsu agar tetap bisa masuk ke sistem.
+o	🕵️ Misi: Apa nama service yang dibuat attacker?
+
+4.	Hidden Data
+o	Attacker menyembunyikan file sensitif di dalam sebuah gambar.
+o	🕵️ Misi: Apa nama file gambar yang digunakan attacker?
+
+5.	Secret Note
+o	Ternyata ada file rahasia yang disembunyikan di dalam gambar tersebut.
+o	🕵️ Misi: File penting apa yang dicuri attacker?
+
+6.	Memory loss
+o	History perintah user tiba-tiba kosong.
+o	🕵️ Misi: Apa nama file history dari user yang dihapus isinya?
+
+7.	Secret Tunnel
+o	Attacker membuat tunnel untuk mengirim data keluar.
+o	🕵️ Misi: Port berapa yang digunakan attacker?
+
+8.	Hidden IP
+o	IP milik attacker tersimpan di dalam informasi tunnel.
+o	🕵️ Misi: Berapa alamat IP attacker?
