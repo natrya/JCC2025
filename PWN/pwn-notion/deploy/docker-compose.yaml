@@ -1,0 +1,15 @@
+version: '3'
+services:
+  baycysec-notion:
+    image: baycysec-notion
+    build: .
+    restart: always
+    environment:
+      - TERM=xterm
+    ports:
+      - "25282:25282"
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 8192
+      cpu: 20  # Limit CPU time similar to rlimit_cpu in xinetd
